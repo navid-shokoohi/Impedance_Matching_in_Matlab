@@ -243,7 +243,7 @@ function corner_and_legend(ax, fs, ...
 % Your requested positions:
 % Corner labels
 text(ax,  1.02, 0.02, 'Short', 'FontSize',fs);   % moved to right
-text(ax, -0.99, 0.02, 'Open',  'FontSize',fs);
+text(ax, -1.2, 0.02, 'Open',  'FontSize',fs);
 text(ax,  0.02, 0.02, 'Match', 'FontSize',fs);
 
 % Tiny legends (outside circle)
