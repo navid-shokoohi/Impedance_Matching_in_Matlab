@@ -47,6 +47,8 @@ Dense, colorful, fully-labeled **Smith charts** in plain MATLAB — **no toolbox
 
 ```matlab
 >> SmithInteractive
+
+
 You’ll be prompted for:
 
 Z0 (Ω), e.g. 50
@@ -59,8 +61,6 @@ ZL list, e.g. 25+30j, 80-20j, 10, 100+50j
 Choose Overlay (Z+Y) or Two panels (Z|Y) and enjoy the plot.
 
 🖼️ Direct API
-matlab
-Copy code
 % One overlaid chart (Z + Y)
 ax = Smith();
 
@@ -75,8 +75,6 @@ Two-panel → ax.Z, ax.Y
 You can add your own markers/annotations using standard plot/text(ax, ...).
 
 🧪 Example Inputs
-text
-Copy code
 Z0: 50
 f0: 2.4e9
 ZL list: 25+30j, 80-20j, 10, 100+50j
@@ -98,9 +96,6 @@ Y-labeling	Use unnormalized YL = 1/ZL (default) or normalized y = (1/ZL)/(1/Z0)	
 
 Want the chart title at the bottom?
 Set the title and then:
-
-matlab
-Copy code
 t = title(axZ, 'Your title here');
 set(t, 'Units','normalized');
 t.Position(1) = 0.5;      % center
@@ -108,6 +103,7 @@ t.Position(2) = -0.12;    % move below axes
 t.HorizontalAlignment = 'center';
 t.VerticalAlignment   = 'top';
 📐 How Matching Works (L-Match @ f₀)
+
 For each load ZL:
 
 Option A (Low-Pass): series L, shunt C
@@ -117,11 +113,9 @@ Option B (High-Pass): series C, shunt L
 Both land at Γ = 0 (center) at the design frequency f₀. Component values are computed, SI-scaled (pF/nH), and shown on the chart. If a part collapses to ~0 or ∞ it’s omitted in the label.
 
 🩺 Troubleshooting
+
 “Unrecognized function or variable 'Smith'”
 Ensure the file is Smith.m, on the path / current folder:
-
-matlab
-Copy code
 which Smith -all
 clear functions; rehash
 “Invalid data argument” in plot
@@ -131,15 +125,15 @@ Overlapping labels
 Increase nSec or rStepZ for loads; adjust rLblM for match callouts; or use two-panel mode.
 
 📁 Structure
-matlab
-Copy code
 .
 ├─ Smith.m               % Core renderer (overlay or two-panel)
 └─ SmithInteractive.m    % UI: inputs, plotting, matching, labeling
 Optional: add screenshots in docs/ and update image links.
 
 🤝 Contributing
+
 Issues and PRs welcome! Style guidelines: keep helpers axes-handle safe, prefer clear math, and avoid toolbox dependencies.
 
 📜 License
+
 Add your preferred license (e.g., MIT) in LICENSE.
