@@ -1,4 +1,5 @@
-function Smith(mode)
+%function Smith(mode)
+function ax = Smith(mode)
 % Smith.m — Dense, colorful, fully-labeled Smith chart(s) with handle-safe helpers.
 % No toolboxes required. Works on older MATLAB.
 %
@@ -65,33 +66,37 @@ if strcmpi(mode,'two')
         col_rMaj, col_xpMaj, col_xnMaj, ...
         col_gMaj, col_bpMaj, col_bnMaj, 'y');
     title(ax2,'Y-Smith (g,b)');
+    ax = struct('Z', ax1, 'Y', ax2);
 
 else
     % ---- Single overlaid chart (Z + Y) ----
-    ax = axes; hold(ax,'on'); axis(ax,'equal'); axis(ax,'off');
-    baseCircle(ax, col_axis);
-    set(ax,'XLim',[-1.65 1.65],'YLim',[-1.15 1.05]);
+    axh = axes; hold(axh,'on'); axis(axh,'equal'); axis(axh,'off');
+    baseCircle(axh, col_axis);
+    set(axh,'XLim',[-1.65 1.65],'YLim',[-1.15 1.05]);
 
     % Z-grid
-    draw_const_r(ax, rMaj, col_rMaj, lwMaj); draw_const_r(ax, rMin, col_rMin, lwMin);
-    draw_const_x(ax, xMaj, +1, col_xpMaj, lwMaj); draw_const_x(ax, xMin, +1, col_xpMin, lwMin);
-    draw_const_x(ax, xMaj, -1, col_xnMaj, lwMaj); draw_const_x(ax, xMin, -1, col_xnMin, lwMin);
-    add_labels_r(ax, rMaj, col_rMaj, fs);
-    add_labels_x(ax, +1, xMaj, col_xpMaj, fs);
-    add_labels_x(ax, -1, xMaj, col_xnMaj, fs);
+    draw_const_r(axh, rMaj, col_rMaj, lwMaj); draw_const_r(axh, rMin, col_rMin, lwMin);
+    draw_const_x(axh, xMaj, +1, col_xpMaj, lwMaj); draw_const_x(axh, xMin, +1, col_xpMin, lwMin);
+    draw_const_x(axh, xMaj, -1, col_xnMaj, lwMaj); draw_const_x(axh, xMin, -1, col_xnMin, lwMin);
+    add_labels_r(axh, rMaj, col_rMaj, fs);
+    add_labels_x(axh, +1, xMaj, col_xpMaj, fs);
+    add_labels_x(axh, -1, xMaj, col_xnMaj, fs);
 
     % Y-grid
-    draw_const_g(ax, gMaj, col_gMaj, lwMaj); draw_const_g(ax, gMin, col_gMin, lwMin);
-    draw_const_b(ax, bMaj, +1, col_bpMaj, lwMaj); draw_const_b(ax, bMin, +1, col_bpMin, lwMin);
-    draw_const_b(ax, bMaj, -1, col_bnMaj, lwMaj); draw_const_b(ax, bMin, -1, col_bnMin, lwMin);
-    add_labels_g(ax, gMaj, col_gMaj, fs);
-    add_labels_b(ax, +1, bMaj, col_bpMaj, fs);
-    add_labels_b(ax, -1, bMaj, col_bnMaj, fs);
+    draw_const_g(axh, gMaj, col_gMaj, lwMaj); draw_const_g(axh, gMin, col_gMin, lwMin);
+    draw_const_b(axh, bMaj, +1, col_bpMaj, lwMaj); draw_const_b(axh, bMin, +1, col_bpMin, lwMin);
+    draw_const_b(axh, bMaj, -1, col_bnMaj, lwMaj); draw_const_b(axh, bMin, -1, col_bnMin, lwMin);
+    add_labels_g(axh, gMaj, col_gMaj, fs);
+    add_labels_b(axh, +1, bMaj, col_bpMaj, fs);
+    add_labels_b(axh, -1, bMaj, col_bnMaj, fs);
 
-    corner_and_legend(ax, fs, ...
+    corner_and_legend(axh, fs, ...
         col_rMaj, col_xpMaj, col_xnMaj, ...
         col_gMaj, col_bpMaj, col_bnMaj, 'both');
-    title(ax,'Dual Smith Chart: Z (r,x) + Y (g,b)','FontSize',fs+2);
+    title(axh,'Dual Smith Chart: Z (r,x) + Y (g,b)','FontSize',fs+2);
+
+    % return handle struct (DO THIS LAST)
+    ax = struct('Overlay', axh);
 end
 end
 
